@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Painting Board</title>
+	<meta charset="utf-8">
+	<meta author = "Venkat">
+	<meta description = "A Basic Paint and Draw App on Web Browser by Venkat Sai Maragani">
+  <meta name="keywords" 
+         content="Simple Draw Paint SavePaint Colorfull WebApp Online Browser">
+  <meta name="robots" content="noindex,nofollow">
+</head>
+<style>
+body{
+	background-color:whitesmoke;
+}
+#toolbox{
+	padding:10px;
+	position:fixed;
+	background-color:whitesmoke;
+}
+.board{
+	padding:100px;
+	text-align:center;	
+}
+.board canvas,#toolbox{
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	transiton:all;
+}
+.board canvas:hover{
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+#toolbox button,#toolbox input,#toolbox select{
+	border:none;
+	outline:none;
+	cursor:pointer;
+	background-color:inherit;
+	margin:5px;
+}
+</style>
+<script>
+var mouseclicked = false;
+var width=500,height=500; 
+var lines_hist = [];
+var thickness = 3;
+var fgcolor = "#808080";
+var bgcolor = "white";
+var pointer = 0;
+var stack = [];
+var undo_max_buffer_size = 5;
+var scale = 1;
+</script>
+<body>
+	<div id="toolbox">
+		<button onclick="clear_board()"title="Clear Board"><u>C</u>lear</button>
+		<button onclick="save()"title="Save Paint"><u>S</u>ave</button>
+		<button onclick="undo()"title="Undo"><u>U</u>ndo</button>
+		<button onclick="redo()"title="Redo"><u>R</u>edo</button>
+		<input title="Pen color" type="color"onchange="fgcolor=this.value"onload="fgcolor=this.value"value="#808080">
+		<select onchange="thickness=this.value" title="Pen options">
+			<option value="1" >Pencil</option>
+			<option value="3"selected>Pen</option>
+			<option value="6">Sketch Pen</option>
+			<option value="10">Marker</option>
+		</select> 
+		<input type="number"onload="this.value=width"onchange="apply(this.value,'width')"style="border:1px solid;" title="width"> x
+		<input type="number"style="border:1px solid;"onload="this.value=height"onchange="apply(this.value,'height')"title="height">
+    <button><a href="https://www.linkedin.com/in/venkat-maragani">Follow me</a></button>
+	</div>
+	<div class="board">
+	<canvas id="board"></canvas>
+	</div>
+
+		<div id="images">
+	<div >
+	
+	</div>
+		
+	</div>
+<script>
+var canvas = document.getElementById("board");
+var ctx = canvas.getContext('2d');
+canvas.onfocus = function(e){
+	this.style.outline = "1px solid blue";
+	console.log(e);
+}
+canvas.addEventListener("onkeypress",function(e){
+	let key = e.key;
+	console.log(e);
+});
+function apply(value,attr){
+	if(attr=="width"){
+		canvas.width = value
+		width=value;
+	}else if(attr=="height"){
+		canvas.height = value
+		height=value;
+	}
+}
+function undo(){
+	if(lines_hist.length == 0)return;
+	if(stack.length == undo_max_buffer_size)return;
+	stack.push(lines_hist.pop());
+}
+function redo(){
+	if(stack.length == 0)return;
+	lines_hist.push(stack.pop());
+}
+ctx.lineCap = "round";
+function background(color="black"){	
+	ctx.fillStyle = color;
+	ctx.fillRect(0,0,width,height);
+}
+canvas.width = width;
+canvas.height = height;
+canvas.onmouseup = function(e){
+	mouseclicked = false;
+	canvas.style.cursor = "default";
+}
+canvas.onmousedown = function(e){
+	mouseclicked = true;
+	let rect = canvas.getBoundingClientRect();
+	let x = e.clientX - rect.left;
+	let y = e.clientY - rect.top;
+	let start = [{x:x,y:y}]
+	start.color = fgcolor;
+	start.width = thickness;
+	lines_hist.push(start);
+	canvas.style.cursor = "crosshair";
+}
+canvas.onmousemove = function(e){
+	if(mouseclicked){
+		let rect = canvas.getBoundingClientRect();
+		let x = e.clientX - rect.left;
+		let y = e.clientY - rect.top;
+		lines_hist[lines_hist.length-1].push({x:x,y:y});
+	}
+}
+function clear_board(){
+	lines_hist = [];
+}
+function save(){
+	var filename = prompt("File Name please ? Image will be saved as \".png\" extension","paint");
+	if(filename===null){
+		return;
+	}
+	filename += "  ["+(new Date().toLocaleString())+"].png";
+	let t_ctx = document.createElement("canvas").getContext('2d');
+	t_ctx.canvas.width=width;
+	t_ctx.canvas.height=height;
+	t_ctx.clearRect(0,0,width,height);
+	for(var j=0;j<lines_hist.length;j++){
+		t_ctx.beginPath();
+		t_ctx.lineWidth = lines_hist[j].width;
+		t_ctx.strokeStyle = lines_hist[j].color;
+		t_ctx.moveTo(lines_hist[j][0].x,lines_hist[j][0].y);
+		for(var i=1;i<lines_hist[j].length;i++){
+			let p = lines_hist[j][i];
+			t_ctx.lineTo(p.x,p.y);
+		}
+		t_ctx.stroke();
+		t_ctx.closePath();
+	}
+	var imageurl = t_ctx.canvas.toDataURL();
+	let a= document.createElement("a");
+	a.href = imageurl;
+	a.download=filename;a.target="_blank"
+	a.rel="noopener"
+	try {
+		a.dispatchEvent(new MouseEvent('click'))
+	} catch (e) {
+		var evt = document.createEvent('MouseEvents')
+		evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
+						      20, false, false, false, false, 0, null)
+		a.dispatchEvent(evt)
+	}
+}
+function draw(){
+	background(bgcolor);
+	for(var j=0;j<lines_hist.length;j++){
+		ctx.beginPath();
+		ctx.lineWidth = lines_hist[j].width;
+		ctx.strokeStyle = lines_hist[j].color;
+		ctx.moveTo(lines_hist[j][0].x,lines_hist[j][0].y);
+		for(var i=1;i<lines_hist[j].length;i++){
+			let p = lines_hist[j][i];
+			ctx.lineTo(p.x,p.y);
+		}
+		ctx.stroke();
+		ctx.closePath();
+	}
+	requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+</script>
+</body>
+</html>
