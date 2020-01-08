@@ -28,7 +28,8 @@ window.mobilecheck = function() {
     return false;
   }
 }
-if(mobilecheck()){
+if(mobilecheck()===true){
+	alert("Mobile Phone Detected!")
 	document.body.innerHTML = `
 <h1 style="font-size:50px"><img src="./favicon.ico"><br>Unfortunately Mobile Browsers don't support this Page</h1>
 <p style="font-size:30px">Don't worry Open our site on Desktop Browsers to Enjoy drawing</p>
