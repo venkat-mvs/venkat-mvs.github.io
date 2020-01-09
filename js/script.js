@@ -1,5 +1,6 @@
 var canvas = document.getElementById("board");
 var ctx = canvas.getContext('2d');
+
 function apply(value,attr){
 	if(attr=="width"){
 		canvas.width = value
@@ -48,6 +49,7 @@ canvas.onmousemove = function(e){
 		lines_hist[lines_hist.length-1].push({x:x,y:y});
 	}
 }
+canvas.onmouseleave = function(e){mouseclicked=false;}
 function clear_board(){
 	lines_hist = [];
 }
