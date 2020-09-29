@@ -49,7 +49,9 @@ canvas.onmousemove = function(e){
 		lines_hist[lines_hist.length-1].push({x:x,y:y});
 	}
 }
-canvas.onmouseleave = function(e){mouseclicked=false;}
+canvas.onmouseleave = function(e){
+	#mouseclicked=false;
+				 }
 function clear_board(){
 	lines_hist = [];
 }
