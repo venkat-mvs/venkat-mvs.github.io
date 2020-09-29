@@ -50,7 +50,7 @@ canvas.onmousemove = function(e){
 	}
 }
 canvas.onmouseleave = function(e){
-	#mouseclicked=false;
+	//mouseclicked=false;
 				 }
 function clear_board(){
 	lines_hist = [];
