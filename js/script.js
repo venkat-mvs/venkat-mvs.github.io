@@ -1,6 +1,40 @@
 var canvas = document.getElementById("board");
 var ctx = canvas.getContext('2d');
 
+function onLoad(){	
+	canvas.width = width;
+	canvas.height = height;
+	ctx.lineCap = "round";
+	canvas.onmouseup = function(e){
+		mouseclicked = false;
+		canvas.style.cursor = "default";
+	}
+	canvas.onmousedown = function(e){
+		mouseclicked = true;
+		let rect = canvas.getBoundingClientRect();
+		let x = e.clientX - rect.left;
+		let y = e.clientY - rect.top;
+		let start = [{x:x,y:y}]
+		start.color = fgcolor;
+		start.width = thickness;
+		lines_hist.push(start);
+		canvas.style.cursor = "crosshair";
+	}
+	canvas.onmousemove = function(e){
+		if(mouseclicked){
+			let rect = canvas.getBoundingClientRect();
+			let x = e.clientX - rect.left;
+			let y = e.clientY - rect.top;
+			lines_hist[lines_hist.length-1].push({x:x,y:y});
+		}
+	}
+	canvas.onmouseleave = function(e){
+		//mouseclicked=false;
+	}
+	
+	requestAnimationFrame(draw);
+}
+
 function apply(value,attr){
 	if(attr=="width"){
 		canvas.width = value
@@ -10,6 +44,7 @@ function apply(value,attr){
 		height=value;
 	}
 }
+
 function undo(){
 	if(lines_hist.length == 0)return;
 	if(stack.length == undo_max_buffer_size)return;
@@ -19,39 +54,11 @@ function redo(){
 	if(stack.length == 0)return;
 	lines_hist.push(stack.pop());
 }
-ctx.lineCap = "round";
 function background(color="black"){	
 	ctx.fillStyle = color;
 	ctx.fillRect(0,0,width,height);
 }
-canvas.width = width;
-canvas.height = height;
-canvas.onmouseup = function(e){
-	mouseclicked = false;
-	canvas.style.cursor = "default";
-}
-canvas.onmousedown = function(e){
-	mouseclicked = true;
-	let rect = canvas.getBoundingClientRect();
-	let x = e.clientX - rect.left;
-	let y = e.clientY - rect.top;
-	let start = [{x:x,y:y}]
-	start.color = fgcolor;
-	start.width = thickness;
-	lines_hist.push(start);
-	canvas.style.cursor = "crosshair";
-}
-canvas.onmousemove = function(e){
-	if(mouseclicked){
-		let rect = canvas.getBoundingClientRect();
-		let x = e.clientX - rect.left;
-		let y = e.clientY - rect.top;
-		lines_hist[lines_hist.length-1].push({x:x,y:y});
-	}
-}
-canvas.onmouseleave = function(e){
-	//mouseclicked=false;
-				 }
+
 function clear_board(){
 	lines_hist = [];
 }
@@ -64,6 +71,7 @@ function save(){
 	let t_ctx = document.createElement("canvas").getContext('2d');
 	t_ctx.canvas.width=width;
 	t_ctx.canvas.height=height;
+	t_ctx.lineCap = "round";
 	t_ctx.clearRect(0,0,width,height);
 	for(var j=0;j<lines_hist.length;j++){
 		t_ctx.beginPath();
@@ -91,6 +99,8 @@ function save(){
 		a.dispatchEvent(evt)
 	}
 }
+
+
 function draw(){
 	background(bgcolor);
 	for(var j=0;j<lines_hist.length;j++){
@@ -107,4 +117,5 @@ function draw(){
 	}
 	requestAnimationFrame(draw);
 }
-requestAnimationFrame(draw);
+
+window.onload = onLoad
