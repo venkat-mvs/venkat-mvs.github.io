@@ -1,0 +1,9 @@
+.v-cover{
+    background-image: url("../images/white-crumpled-paper-background.webp");
+    background-position: fixed;
+    height: 100vh;
+}
+
+.proj{
+    min-width: 40%;
+}

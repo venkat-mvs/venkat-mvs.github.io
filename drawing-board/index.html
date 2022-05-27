@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Venkat | Painting Board</title>
+	<meta charset="utf-8">
+	<meta author = "Venkat">
+	<meta name="description" content="A Basic Paint and Draw App on Web Browser by Venkat Sai Maragani Hosted with ❤️ by GitHub">
+	<meta name="keywords" 
+         content="Simple Draw Paint SavePaint Colorfull WebApp Online Browser">
+	<meta name="robots" content="noindex,nofollow">	
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.png">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./css/style.css">
+</head>
+<script>
+window.mobilecheck = function() { 
+ if( navigator.userAgent.match(/Android/i)
+ || navigator.userAgent.match(/webOS/i)
+ || navigator.userAgent.match(/iPhone/i)
+ || navigator.userAgent.match(/iPad/i)
+ || navigator.userAgent.match(/iPod/i)
+ || navigator.userAgent.match(/BlackBerry/i)
+ || navigator.userAgent.match(/Windows Phone/i)
+ ){
+    return true;
+  }
+ else {
+    return false;
+  }
+}
+var mouseclicked = false;
+var width=500,height=500; 
+var lines_hist = [];
+var thickness = 3;
+var fgcolor = "#808080";
+var bgcolor = "white";
+var pointer = 0;
+var stack = [];
+var undo_max_buffer_size = 5;
+var scale = 1;
+</script>
+<body>
+	<div id="toolbox">
+		<button onclick="clear_board()"title="Clear Board"><u>C</u>lear</button>
+		<button onclick="save()"title="Save Paint"><u>S</u>ave</button>
+		<button onclick="undo()"title="Undo"><u>U</u>ndo</button>
+		<button onclick="redo()"title="Redo"><u>R</u>edo</button>
+		<input title="Pen color" type="color"onchange="fgcolor=this.value"onload="fgcolor=this.value"value="#808080">
+		<select onchange="thickness=this.value" title="Pen options">
+			<option value="1" >Pencil</option>
+			<option value="3"selected>Pen</option>
+			<option value="6">Sketch Pen</option>
+			<option value="10">Marker</option>
+		</select> 
+		<input type="number"onload="this.value=width"onchange="apply(this.value,'width')"style="border:1px solid;" title="width"> x
+		<input type="number"style="border:1px solid;"onload="this.value=height"onchange="apply(this.value,'height')"title="height">
+    <button>Follow me<a href="https://www.linkedin.com/in/venkat-maragani"> @LinkedIN </a><a href="https://www.github.com/venkat-mvs"> @GitHub</a></button>
+	</div>
+	<div class="board">
+	<canvas id="board"></canvas>
+	</div>
+
+		<div id="images">
+	<div >
+	
+	</div>
+		
+	</div>
+<script>
+if(mobilecheck()===true){
+	document.body.innerHTML = `
+<h1 style="font-size:50px"><img src="./favicon.ico"><br>Unfortunately Mobile Browsers don't support this Page</h1>
+<p style="font-size:30px">Don't worry Open our site on Desktop Browsers to Enjoy drawing</p>
+<p> Follow me<a href="https://www.linkedin.com/in/venkat-maragani"> @LinkedIN </a><a href="https://www.github.com/venkat-mvs"> @GitHub</a></p>
+`;
+}	
+</script>
+<script src="./js/script.js"></script>
+</body>
+</html>

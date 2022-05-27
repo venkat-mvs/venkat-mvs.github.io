@@ -1,80 +1,93 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Painting Board</title>
-	<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
 	<meta author = "Venkat">
 	<meta name="description" content="A Basic Paint and Draw App on Web Browser by Venkat Sai Maragani Hosted with ❤️ by GitHub">
 	<meta name="keywords" 
          content="Simple Draw Paint SavePaint Colorfull WebApp Online Browser">
 	<meta name="robots" content="noindex,nofollow">
-	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">	
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.png">	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="./css/style.css">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/styles.css">
+        
+    <title>Venkat Profile</title>
 </head>
-<script>
-window.mobilecheck = function() { 
- if( navigator.userAgent.match(/Android/i)
- || navigator.userAgent.match(/webOS/i)
- || navigator.userAgent.match(/iPhone/i)
- || navigator.userAgent.match(/iPad/i)
- || navigator.userAgent.match(/iPod/i)
- || navigator.userAgent.match(/BlackBerry/i)
- || navigator.userAgent.match(/Windows Phone/i)
- ){
-    return true;
-  }
- else {
-    return false;
-  }
-}
-var mouseclicked = false;
-var width=500,height=500; 
-var lines_hist = [];
-var thickness = 3;
-var fgcolor = "#808080";
-var bgcolor = "white";
-var pointer = 0;
-var stack = [];
-var undo_max_buffer_size = 5;
-var scale = 1;
-</script>
-<body>
-	<div id="toolbox">
-		<button onclick="clear_board()"title="Clear Board"><u>C</u>lear</button>
-		<button onclick="save()"title="Save Paint"><u>S</u>ave</button>
-		<button onclick="undo()"title="Undo"><u>U</u>ndo</button>
-		<button onclick="redo()"title="Redo"><u>R</u>edo</button>
-		<input title="Pen color" type="color"onchange="fgcolor=this.value"onload="fgcolor=this.value"value="#808080">
-		<select onchange="thickness=this.value" title="Pen options">
-			<option value="1" >Pencil</option>
-			<option value="3"selected>Pen</option>
-			<option value="6">Sketch Pen</option>
-			<option value="10">Marker</option>
-		</select> 
-		<input type="number"onload="this.value=width"onchange="apply(this.value,'width')"style="border:1px solid;" title="width"> x
-		<input type="number"style="border:1px solid;"onload="this.value=height"onchange="apply(this.value,'height')"title="height">
-    <button>Follow me<a href="https://www.linkedin.com/in/venkat-maragani"> @LinkedIN </a><a href="https://www.github.com/venkat-mvs"> @GitHub</a></button>
-	</div>
-	<div class="board">
-	<canvas id="board"></canvas>
-	</div>
+<body class="v-cover">
+    <main id="main">
+        <section >
+            <header class="p-4">
+                <h2 class="p-2 bg-light bg-opacity-10 border-top border-bottom border-info">My Profile</h1>
+                <div class="p-2 row">
+                    <div class="col-sm-4 col-lg-2 d-flex align-self-center">
+                        <img class="rounded-circle img-thumbnail" style="width:18rem" src="./images/me.jpg" />
+                    </div>
+                    <div class="col-sm-4 col-lg-4 align-self-center">
+                    <h2 class="center"> Venkat Maragani </h1>
+                    <p> I am a enthusiastic Software Developer</p>
+                    </div>
+                </div>  
+            </header>
+            <section class="p-3">
+                <h2 class="p-2 bg-light bg-opacity-10 border-top border-bottom border-info">Projects</h2>
+                <div class="row flex-wrap justify-content-evenly mt-4">
+                    <div class="proj m-2 col-lg-4 col-sm-1 p-2 card shadow-lg bg-dark bg-opacity-75 text-light">
+                        <div class="card-body mt-2">
+                            <h3 class="card-title">
+                                Drawing Board
+                            </h3>
+                                <p class="card-text"> 
+                                A simple paint board made with Js and css
+                                where we can draw some awesome figures and download them into disk.
+                                Visit the project from the below link
+                                </p>
+                        </div>   
+                        <div class="card-action">
+                            <a href="./drawing-board/" class="card-link">drawing board</a>
+                        </div>
+                    </div> 
+    
+                    <div class="proj m-2 col-lg-4 col-sm-1 p-2 card shadow-lg bg-dark bg-opacity-75 text-light">
+                        <div class="card-body mt-2">
+                            <h3 class="card-title">
+                                Code Editor
+                            </h3>
+                            <p class="card-text"> 
+                                A simple code editor for few languages using Code Mirror
+                                Able to save, highlight syntax, save the code without lost on refresh, vs code theme
+                                are main features of it.
+                            </p>
+                        </div>   
+                        <div class="">
+                        <a href="./code-editor/" class="card-link">code editor</a>
+                        </div>
+                    </div> 
 
-		<div id="images">
-	<div >
-	
-	</div>
-		
-	</div>
-<script>
-if(mobilecheck()===true){
-	document.body.innerHTML = `
-<h1 style="font-size:50px"><img src="./favicon.ico"><br>Unfortunately Mobile Browsers don't support this Page</h1>
-<p style="font-size:30px">Don't worry Open our site on Desktop Browsers to Enjoy drawing</p>
-<p> Follow me<a href="https://www.linkedin.com/in/venkat-maragani"> @LinkedIN </a><a href="https://www.github.com/venkat-mvs"> @GitHub</a></p>
-`;
-}	
-</script>
-<script src="./js/script.js"></script>
+                    <div class="proj m-2 col-lg-4 col-sm-1 p-2 card shadow-lg bg-dark bg-opacity-75 text-light">
+                        <div class="card-body mt-2">
+                            <h3 class="card-title">
+                                Text Editor
+                            </h3>
+                            <p class="card-text"> 
+                                A simple file editor app, developed using python
+                                tkinter. It supports creating new files ,
+                                saving files with appropriate filenames,
+                                can adjust the font and font size
+                            </p>
+                        </div>   
+                        <div class="">
+                        <a href="https://github.com/venkat-mvs/TextEditor" target="_blank" class="card-link">code editor</a>
+                        </div>
+                    </div> 
+                </div>
+            </section> 
+        </section>
+    </main>
 </body>
 </html>
