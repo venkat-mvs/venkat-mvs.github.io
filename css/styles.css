@@ -1,9 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto&display=swap');
+
+*{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
 .v-cover{
-    background-image: url("../images/white-crumpled-paper-background.webp");
+    background-image: url("../images/profpic.png");
     background-position: fixed;
     height: 100vh;
 }
 
 .proj{
     min-width: 40%;
+}
+
+.card-title{
+    font-weight: bolder;
+} 
+.card-text{
+    font-weight: bold;
 }
