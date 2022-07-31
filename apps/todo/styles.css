@@ -1,0 +1,90 @@
+
+#root, html, body {
+    width: 100vw;
+    padding: 0;
+    margin:0;
+}
+*{
+    font-weight: normal;
+}
+
+.App{
+    width: 50%;
+    margin: auto;
+    margin-top: 10%;
+    padding: 5px;
+}
+
+
+@media (max-width:900px ) {
+    .App{
+        width: 95%;
+    }
+}
+
+.form{
+    width: 96%;
+    margin:auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form textarea{
+    width: 90%;
+    padding: 5px;
+    font-size: 1.1rem;
+}
+
+.form button{
+    /* height: ; */
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 40%;
+}
+.todo-entries{
+    width:100%;
+    margin: auto;
+    padding: 5px;
+}
+
+.todo-entry{
+    display: flex;
+    max-width: 93%;
+    justify-content: space-between;
+    height: 1.5rem;
+    padding: 3px;
+    animation: fadeIn .5s;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    background-color: rgb(236, 232, 232);
+    color: rgb(17, 15, 15);
+    font-weight: bold;
+    padding:2%;
+}
+
+.todo-entry button{
+    background-color: transparent;
+    color: black;
+    border: none;
+    cursor:pointer;
+}
+
+.fadeOut{
+    animation: fadeOut .5s;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
