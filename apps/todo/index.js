@@ -38,13 +38,13 @@ function App(){
     return <div className="App">
         <div className="form">
             <textarea onChange={e => setName(e.target.value)} value={name}/>
-            <button onClick={e => addName(name)}> 📌 </button>
+            <button onClick={e => addName(name)}> <i className="fa fa-plus" aria-hidden="true"></i>  </button>
         </div>
         <div className="todo-entries">
         {
             names.map((subject,i) => {
                 return <div key={i} className={"todo-entry"}>
-                        {subject} <button onClick={e => removeName(i)}>❌</button>
+                        {subject} <button onClick={e => removeName(i)}><i class="fa fa-close"></i></button>
                     </div>
             })
         }
