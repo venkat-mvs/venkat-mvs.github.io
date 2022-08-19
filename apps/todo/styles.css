@@ -1,6 +1,5 @@
 
-#root, html, body {
-    width: 100vw;
+#root, html, body { 
     padding: 0;
     margin:0;
     background-image: url("./images/background.jpg");
@@ -63,7 +62,6 @@
     display: flex;
     max-width: 93%;
     justify-content: space-between;
-    height: 1.5rem;
     padding: 3px;
     animation: fadeIn .5s;
     margin-top: 2px;
