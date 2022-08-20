@@ -10,6 +10,12 @@
     width: 80%;
 }
 
+@media (max-width:900px ) {
+    .App{
+        width: 100%;
+    }
+}
+
 .title-icon{
     width: 2.125rem;
     height: 2.124rem;
@@ -18,7 +24,7 @@
 .check-ls-input{
     border: none;
     outline: none;
-    width: 90%;
+    width: 95%;
 }
 
 .pointer{cursor: pointer;}
