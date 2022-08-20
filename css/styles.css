@@ -11,8 +11,21 @@
     height: 100vh;
 }
 
+.profile-img{
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width:900px) {
+    .profile-img{
+        width: 50%;
+        height: 50%;
+    }
+}
+
 .proj{
     min-width: 40%;
+    padding: 0px 10px;
 }
 
 .card-title{
