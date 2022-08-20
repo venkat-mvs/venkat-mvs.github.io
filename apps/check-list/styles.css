@@ -1,0 +1,102 @@
+.check-item *{
+    /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.App{
+    margin: auto;
+    padding: 1px;
+    width: 80%;
+}
+
+.title-icon{
+    width: 2.125rem;
+    height: 2.124rem;
+    vertical-align:sub;
+}
+.check-ls-input{
+    border: none;
+    outline: none;
+    width: 90%;
+}
+
+.pointer{cursor: pointer;}
+.center{
+    text-align: center;
+}
+
+.check-box{
+    color: rgb(7, 211, 7);
+    margin: 0 4px;
+}
+
+.real-checkbox{
+    border-radius: 50%;
+    outline: none;
+    border: 2px solid blue;
+    display: none;
+}
+
+.striked {
+    text-decoration: line-through;
+}
+
+.none{
+    text-decoration: none;
+}
+
+.hide{
+    display: none;
+}
+.remove-btn{
+    text-align: right;
+    color: red;
+    cursor: pointer;
+    padding-left: 2rem;
+    display: none;
+}
+
+.check-item:hover .remove-btn{
+    display: inline;
+}
+
+.check-item{
+    animation: slideInFromLeft .3s;
+    padding: 5px;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0); }
+    100% { transform: scale(1);}
+}
+
+@keyframes scaleDown {
+    0% { transform: scale(1); }
+    100% { transform: scale(0);}
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes slideInFromRight {
+    0% { transform:translateX(1000px) }
+    100% { transform:translateX(0px) }
+}
+
+@keyframes slideInFromLeft {
+    0% { transform:translateX(-1000px) }
+    100% { transform:translateX(0px) }
+}
+
+@keyframes comeFromTop {
+    0% { transform:translateY(1000px) }
+    100% { transform:translateY(0px) }
+}
