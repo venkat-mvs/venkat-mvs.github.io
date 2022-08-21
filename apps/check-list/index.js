@@ -31,7 +31,7 @@ function App(){
     }
 
     return <div className={"App"}>
-        <h1 className={"center"}>
+        <h1 className={"center title"}>
                 <img className="title-icon" 
                      src="./images/sign-check-icon.png"/>
                 CheckList

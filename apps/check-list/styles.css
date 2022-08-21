@@ -16,10 +16,15 @@
     }
 }
 
+.title{
+    animation: slideFromTop .3s;
+}
+
 .title-icon{
     width: 2.125rem;
     height: 2.124rem;
     vertical-align:sub;
+    animation: slideInFromLeft .6s;
 }
 .check-ls-input{
     border: none;
@@ -68,8 +73,12 @@
 }
 
 .check-item{
-    animation: slideInFromLeft .3s;
+    animation: slideInFromLeft .5s;
     padding: 5px;
+}
+
+.fa-close{
+    animation: slideInFromRight .2s;
 }
 
 @keyframes scaleUp {
@@ -102,7 +111,7 @@
     100% { transform:translateX(0px) }
 }
 
-@keyframes comeFromTop {
-    0% { transform:translateY(1000px) }
+@keyframes slideFromTop {
+    0% { transform:translateY(-1000px) }
     100% { transform:translateY(0px) }
 }
