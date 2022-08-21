@@ -58,6 +58,7 @@ function App(){
             <CheckBox label={
                         <input className="check-ls-input"
                             type="text" 
+                            placeHolder="add task here..."
                             onChange={e=> setCurrentInput(e.target.value)} 
                             value={currentInput}
                             contentEditable={true}/>
@@ -79,7 +80,8 @@ function CheckItem({text, done, onCheck, onRemove}){
     const [removed, setRemoved] = React.useState(false);
 
     return <div className={"check-item" + (removed?" hide":"")}>
-            <CheckBox label={text} 
+            <CheckBox label={text}
+                      title="Click to mark as done"
                       className={checked? "striked":"none"}
                       checked={checked} 
                       onChecked={e => {
@@ -104,6 +106,7 @@ function CheckItem({text, done, onCheck, onRemove}){
                     {text}
             </label> */}
             <span className={"remove-btn"}
+                  title="remove"
                   onClick={e => {
                     onRemove(e)
                     setRemoved(true)
@@ -112,14 +115,16 @@ function CheckItem({text, done, onCheck, onRemove}){
 }
 
 
-function CheckBox({checked, label, onChecked, className}){
+function CheckBox({checked, label, onChecked, className, title}){
 
     const onChange = e => {
         if(checked != e.target.checked)
         onChecked(e)
     }
 
-    return <label onChange={onChange} className={className+ " "+ "pointer"}>
+    return <label onChange={onChange} 
+                  className={className+ " "+ "pointer"}
+                  title={title}>
         <input type="checkbox"
         className="real-checkbox"
         defaultChecked={checked}
