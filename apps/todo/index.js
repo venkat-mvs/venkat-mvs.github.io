@@ -36,18 +36,32 @@ function App(){
     }
 
     return <div className="App">
-        <div className="form">
-            <textarea onChange={e => setName(e.target.value)} value={name}/>
-            <button onClick={e => addName(name)}> <i className="fa fa-plus" aria-hidden="true"></i>  </button>
-        </div>
-        <div className="todo-entries">
-        {
-            names.map((subject,i) => {
-                return <div key={i} className={"todo-entry"}>
-                        {subject} <button onClick={e => removeName(i)}><i class="fa fa-close"></i></button>
-                    </div>
-            })
-        }
+        <h1 className="center title">
+            <i className="fa fa-check"></i> To-do-s
+        </h1>
+        <div className={"todos"}>
+            <div className="form">
+                <textarea onChange={e => setName(e.target.value)} 
+                          value={name}
+                          placeHolder="add todos here.."/>
+                <button onClick={e => addName(name)}
+                        title="add"> 
+                    <i className="fa fa-plus add-todo" aria-hidden="true"></i>  
+                </button>
+            </div>
+            <div className="todo-entries">
+            {
+                names.map((subject,i) => {
+                    return <div key={i} className={"todo-entry"}>
+                            {subject} 
+                            <button onClick={e => removeName(i)}
+                                    title={"done"}>
+                                <i className={"fa fa-check"}></i>
+                            </button>
+                        </div>
+                })
+            }
+            </div>
         </div>
     </div>;
 }

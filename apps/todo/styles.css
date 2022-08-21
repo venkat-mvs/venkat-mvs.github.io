@@ -1,19 +1,42 @@
-
 #root, html, body { 
     padding: 0;
     margin:0;
-    background-image: url("./images/background.jpg");
+    font-size: 1rem;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+:root{
+    --title-border-color-two: rgb(212, 0, 255);
+    --title-border-color: white;
+}
+
+.center{
+    text-align: center;
+}
+
+.title {
+    animation: slideFromTop .5s;
+    color: rgb(132, 6, 250);
+    text-shadow: 2px 0 var(--title-border-color), -2px 0 var(--title-border-color), 
+    0 2px var(--title-border-color), 0 -2px var(--title-border-color),
+    1px 1px var(--title-border-color), -1px -1px var(--title-border-color), 
+    1px -1px var(--title-border-color), -1px 1px var(--title-border-color),
+    3px 0 var(--title-border-color-two), -3px 0 var(--title-border-color-two), 
+    0 3px var(--title-border-color-two), 0 -3px var(--title-border-color-two),
+    2px 2px var(--title-border-color-two), -2px -2px var(--title-border-color-two), 
+    2px -2px var(--title-border-color-two), -2px 2px var(--title-border-color-two);
+}
+
+.title .fa{
+    animation: slideInFromLeft .9s;
 }
 
 .App{
     width: 50%;
     margin: auto;
-    margin-top: 10%;
     padding: 5px;
-    border: 3px dashed yellow;
     border-radius: .2rem;
 }
-
 
 @media (max-width:900px ) {
     .App{
@@ -26,36 +49,38 @@
     margin:auto;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 1rem;
 }
 
 .form textarea{
     width: 90%;
     padding: 5px;
-    font-size: 1.1rem;
-    border:none;
+    font-size: 1rem;
     border-radius: .2rem;
+    border: none;
     outline: none;
+    overflow: hidden;
+    resize: none;
 }
 
 .form button{
     display: flex;
     align-self: center;
-    justify-content: center;
-    font-size: 1.4rem;
     cursor: pointer;
-    background-color: transparent;
     outline: none;
-    border-radius: 5px;
     color: white;
-    /* box-shadow: 2px -2px 1px yellow; */
-    text-shadow: -2px 2px 1px yellow;
-    border: .2rem solid white;
+    background-color: rgb(132, 6, 250);
+    border: none;
+    font-size: 2rem;
+    font-weight: bolder;
     border-radius: 50%;
+    padding: 3px;
+    box-shadow: 2px 2px 5px grey;
 }
+
 .todo-entries{
     width:100%;
     margin: auto;
-    padding: 5px;
 }
 
 .todo-entry{
@@ -67,26 +92,28 @@
     margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 3px;
-    background-color: rgb(236, 232, 232);
-    color: rgb(17, 15, 15);
+    color: white;
+    background-color: rgb(132, 6, 250);
     font-weight: bold;
     padding:2%;
-    box-shadow: -3px -3px 10px lightgrey;
-    text-shadow: 3px 3px 1px yellow;
 }
 
 .todo-entry button{
     background-color: transparent;
-    color: black;
+    color: inherit;
     border: none;
     cursor:pointer;
-    font-size: larger;
-    text-shadow: 3px 3px 1px yellow;
 }
 
-.fadeOut{
-    animation: fadeOut .5s;
+.todo-entry{
+    animation: slideInFromLeft .5s ease-in-out;
 }
+
+.form{
+    animation: slideFromTop .5s;
+}
+
+/* Animations */
 
 @keyframes fadeIn {
   0% { opacity: 0; }
@@ -96,4 +123,19 @@
 @keyframes fadeOut {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@keyframes slideInFromRight {
+    0% { transform:translateX(1000px) }
+    100% { transform:translateX(0px) }
+}
+
+@keyframes slideFromTop {
+    0% { transform:translateY(-1000px) }
+    100% { transform:translateY(0px) }
+}
+
+@keyframes slideInFromLeft {
+    0% { transform:translateX(-1000px) }
+    100% { transform:translateX(0px) }
 }
