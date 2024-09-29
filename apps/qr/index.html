@@ -95,6 +95,22 @@ body{
 <script>
 
 const params = queryParams();
+const ___urls = [
+        "https://media.tenor.com/q8c1KmrQszIAAAAM/gudumba-shankar.gif",
+        "https://media.tenor.com/7lDhYOKZYJoAAAAM/throw-jklsouth.gif",
+        "https://c.tenor.com/EwZJnBDaEPwAAAAd/tenor.gif",
+        "https://media.tenor.com/logfsu_9T7YAAAAM/jklsouth-jkltelugu.gif",
+        "https://media.tenor.com/dASlzSl-YmoAAAAM/brahmi-king.gif",
+        "https://media.tenor.com/LwDCxb6XbDAAAAAM/brahmanandam-venky-brahmanandam.gif",
+        "https://media.tenor.com/UYH6aX1j3FoAAAAM/manchi-manchi-kattubatlu-brahmanandam.gif",
+        "https://media.tenor.com/J6m2-HVBBZUAAAAM/brahmanandam-brahmi.gif",
+        "https://media.tenor.com/8zJ0bYS4NCcAAAAM/what%27s-your-problem-reactions.gif",
+        "https://media.tenor.com/gNKymZ194D8AAAAM/brahmi-king.gif"
+    ]
+
+function randomUrl(){
+    return ___urls[Math.floor(Math.random()*___urls.length)]
+}
 
 function copyClip(){
     if(document.hasFocus())
@@ -153,11 +169,10 @@ function validateUrl(){
         return "url";
     }
     else{
-        Math.random()
-        error(`<center>
-            <h3>Missing details</h3>
-            <p>Check URL and reload the page.</p>
-            </center>`)
+        setTimeout(()=>{
+            params.url = randomUrl()
+            genQR(params.url)
+        }, 1000)
     }
 }
 
@@ -179,14 +194,25 @@ function generateImage(url){
     return qrcode;
 }
 
-
-window.onload = function(){
-    validateUrl();
+function genQR(url){
     const canvas = document.createElement("div")
     canvas.id="qr"
     canvas.classList.add("QR");
     document.body.querySelector(".container").appendChild(canvas);
-    generateImage(params.url);
+    generateImage(url);
+    document.querySelector(".container").onclick = function(){
+        window.location.assign(url)
+        console.log("jkjkd")
+    }
+}
+
+
+window.onload = function(){
+    validateUrl();
+    if(params.url){
+        
+        genQR(params.url)
+    }
 }
 
 
